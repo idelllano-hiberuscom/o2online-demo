@@ -66,7 +66,7 @@ export default function decorate(block) {
   // Texto principal — editable como richtext
   const mainText = block.querySelector('.support-cta-text');
   if (mainText) {
-    mainText.dataset.aueProp = 'mainText';
+    mainText.dataset.aueProp = 'body';
     mainText.dataset.aueType = 'richtext';
     mainText.dataset.aueLabel = 'Texto principal';
   }

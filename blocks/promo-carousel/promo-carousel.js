@@ -108,7 +108,7 @@ export default function decorate(block) {
 
   // Título de sección
   if (titleEl) {
-    titleEl.dataset.aueProp = 'sectionTitle';
+    titleEl.dataset.aueProp = 'heading';
     titleEl.dataset.aueType = 'text';
     titleEl.dataset.aueLabel = 'Título de sección';
   }
@@ -147,7 +147,7 @@ export default function decorate(block) {
     // Texto del badge
     const badge = card.querySelector('.promo-carousel-badge');
     if (badge) {
-      badge.dataset.aueProp = 'badgeText';
+      badge.dataset.aueProp = 'badge';
       badge.dataset.aueType = 'text';
       badge.dataset.aueLabel = 'Texto del badge';
     }
@@ -155,7 +155,7 @@ export default function decorate(block) {
     // Título de la tarjeta
     const cardTitle = card.querySelector('.promo-carousel-card-title');
     if (cardTitle) {
-      cardTitle.dataset.aueProp = 'cardTitle';
+      cardTitle.dataset.aueProp = 'itemHeading';
       cardTitle.dataset.aueType = 'text';
       cardTitle.dataset.aueLabel = 'Título de la tarjeta';
     }

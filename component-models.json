@@ -145,59 +145,24 @@
     "id": "app-promo",
     "fields": [
       {
-        "component": "text",
-        "name": "title",
-        "value": "",
-        "label": "Título",
-        "valueType": "string"
-      },
-      {
         "component": "richtext",
-        "name": "description",
+        "name": "text",
         "value": "",
-        "label": "Descripción",
-        "valueType": "string"
-      },
-      {
-        "component": "richtext",
-        "name": "features",
-        "value": "",
-        "label": "Lista de características",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "appStoreLink",
-        "value": "",
-        "label": "Enlace App Store",
+        "label": "Contenido de texto",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "name": "appStoreBadge",
-        "value": "",
-        "label": "Imagen badge App Store",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "googlePlayLink",
-        "value": "",
-        "label": "Enlace Google Play",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "name": "googlePlayBadge",
-        "value": "",
-        "label": "Imagen badge Google Play",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "name": "phoneImage",
+        "name": "image",
         "value": "",
         "label": "Imagen del teléfono",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "value": "",
+        "label": "Texto alternativo imagen",
         "valueType": "string"
       }
     ]
@@ -207,7 +172,7 @@
     "fields": [
       {
         "component": "text",
-        "name": "sectionTitle",
+        "name": "heading",
         "value": "",
         "label": "Título de sección",
         "valueType": "string"
@@ -233,14 +198,14 @@
       },
       {
         "component": "text",
-        "name": "cardTitle",
+        "name": "itemHeading",
         "value": "",
         "label": "Título",
         "valueType": "string"
       },
       {
         "component": "richtext",
-        "name": "cardText",
+        "name": "itemDescription",
         "value": "",
         "label": "Texto descriptivo",
         "valueType": "string"
@@ -311,7 +276,7 @@
       },
       {
         "component": "text",
-        "name": "ctaLink",
+        "name": "cta",
         "value": "",
         "label": "Enlace del botón",
         "valueType": "string"
@@ -359,7 +324,7 @@
     "fields": [
       {
         "component": "text",
-        "name": "sectionTitle",
+        "name": "heading",
         "value": "",
         "label": "Título de sección",
         "valueType": "string"
@@ -373,7 +338,7 @@
       },
       {
         "component": "text",
-        "name": "lmaBannerLink",
+        "name": "lmaBanner",
         "value": "",
         "label": "Enlace banner líneas adicionales",
         "valueType": "string"
@@ -397,21 +362,21 @@
     "fields": [
       {
         "component": "richtext",
-        "name": "tariffInfo",
+        "name": "tariff_info",
         "value": "",
         "label": "Datos de tarifa",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "price",
+        "name": "tariff_price",
         "value": "",
         "label": "Precio",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "priceNote",
+        "name": "tariff_note",
         "value": "",
         "label": "Texto de precio",
         "valueType": "string"
@@ -458,7 +423,7 @@
     "fields": [
       {
         "component": "text",
-        "name": "sectionTitle",
+        "name": "heading",
         "value": "",
         "label": "Título de sección",
         "valueType": "string"
@@ -484,14 +449,14 @@
       },
       {
         "component": "text",
-        "name": "badgeText",
+        "name": "badge",
         "value": "",
         "label": "Texto del badge",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "cardTitle",
+        "name": "itemHeading",
         "value": "",
         "label": "Título de la tarjeta",
         "valueType": "string"
@@ -524,7 +489,7 @@
       },
       {
         "component": "richtext",
-        "name": "mainText",
+        "name": "body",
         "value": "",
         "label": "Texto principal",
         "valueType": "string"
@@ -538,7 +503,7 @@
       },
       {
         "component": "text",
-        "name": "linkUrl",
+        "name": "link",
         "value": "",
         "label": "URL del enlace",
         "valueType": "string"
@@ -550,7 +515,7 @@
     "fields": [
       {
         "component": "text",
-        "name": "sectionTitle",
+        "name": "heading",
         "value": "",
         "label": "Título de sección",
         "valueType": "string"
@@ -569,14 +534,14 @@
       },
       {
         "component": "text",
-        "name": "cardTitle",
+        "name": "itemHeading",
         "value": "",
         "label": "Título",
         "valueType": "string"
       },
       {
         "component": "richtext",
-        "name": "cardText",
+        "name": "itemDescription",
         "value": "",
         "label": "Texto descriptivo",
         "valueType": "string"

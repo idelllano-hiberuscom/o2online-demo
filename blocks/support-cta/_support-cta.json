@@ -29,7 +29,7 @@
         },
         {
           "component": "richtext",
-          "name": "mainText",
+          "name": "body",
           "value": "",
           "label": "Texto principal",
           "valueType": "string"
@@ -43,7 +43,7 @@
         },
         {
           "component": "text",
-          "name": "linkUrl",
+          "name": "link",
           "value": "",
           "label": "URL del enlace",
           "valueType": "string"

@@ -38,7 +38,7 @@
       "fields": [
         {
           "component": "text",
-          "name": "sectionTitle",
+          "name": "heading",
           "value": "",
           "label": "Título de sección",
           "valueType": "string"
@@ -64,14 +64,14 @@
         },
         {
           "component": "text",
-          "name": "badgeText",
+          "name": "badge",
           "value": "",
           "label": "Texto del badge",
           "valueType": "string"
         },
         {
           "component": "text",
-          "name": "cardTitle",
+          "name": "itemHeading",
           "value": "",
           "label": "Título de la tarjeta",
           "valueType": "string"

@@ -21,59 +21,24 @@
       "id": "app-promo",
       "fields": [
         {
-          "component": "text",
-          "name": "title",
-          "value": "",
-          "label": "Título",
-          "valueType": "string"
-        },
-        {
           "component": "richtext",
-          "name": "description",
+          "name": "text",
           "value": "",
-          "label": "Descripción",
-          "valueType": "string"
-        },
-        {
-          "component": "richtext",
-          "name": "features",
-          "value": "",
-          "label": "Lista de características",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "name": "appStoreLink",
-          "value": "",
-          "label": "Enlace App Store",
+          "label": "Contenido de texto",
           "valueType": "string"
         },
         {
           "component": "reference",
-          "name": "appStoreBadge",
-          "value": "",
-          "label": "Imagen badge App Store",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "name": "googlePlayLink",
-          "value": "",
-          "label": "Enlace Google Play",
-          "valueType": "string"
-        },
-        {
-          "component": "reference",
-          "name": "googlePlayBadge",
-          "value": "",
-          "label": "Imagen badge Google Play",
-          "valueType": "string"
-        },
-        {
-          "component": "reference",
-          "name": "phoneImage",
+          "name": "image",
           "value": "",
           "label": "Imagen del teléfono",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "imageAlt",
+          "value": "",
+          "label": "Texto alternativo imagen",
           "valueType": "string"
         }
       ]

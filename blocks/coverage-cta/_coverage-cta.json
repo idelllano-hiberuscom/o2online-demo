@@ -43,7 +43,7 @@
         },
         {
           "component": "text",
-          "name": "ctaLink",
+          "name": "cta",
           "value": "",
           "label": "Enlace del botón",
           "valueType": "string"

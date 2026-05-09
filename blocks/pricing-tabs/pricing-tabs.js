@@ -136,7 +136,7 @@ export default function decorate(block) {
 
   // Título de sección
   if (titleH2) {
-    titleH2.dataset.aueProp = 'sectionTitle';
+    titleH2.dataset.aueProp = 'heading';
     titleH2.dataset.aueType = 'text';
     titleH2.dataset.aueLabel = 'Título de sección';
   }
@@ -160,7 +160,7 @@ export default function decorate(block) {
     // Datos de tarifa (richtext)
     const cardTitle = card.querySelector('.pricing-tabs-card-title');
     if (cardTitle) {
-      cardTitle.dataset.aueProp = 'tariffInfo';
+      cardTitle.dataset.aueProp = 'tariff_info';
       cardTitle.dataset.aueType = 'richtext';
       cardTitle.dataset.aueLabel = 'Datos de tarifa';
     }
@@ -168,7 +168,7 @@ export default function decorate(block) {
     // Precio
     const cardPrice = card.querySelector('.pricing-tabs-card-price');
     if (cardPrice) {
-      cardPrice.dataset.aueProp = 'price';
+      cardPrice.dataset.aueProp = 'tariff_price';
       cardPrice.dataset.aueType = 'text';
       cardPrice.dataset.aueLabel = 'Precio';
     }

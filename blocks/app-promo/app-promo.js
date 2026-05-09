@@ -97,35 +97,17 @@ export default function decorate(block) {
   block.dataset.aueModel = 'app-promo';
   block.dataset.aueLabel = 'App Promo';
 
-  // Título
-  const title = textCol?.querySelector('.app-promo-title');
-  if (title) {
-    title.dataset.aueProp = 'title';
-    title.dataset.aueType = 'text';
-    title.dataset.aueLabel = 'Título';
-  }
-
-  // Descripción
-  const description = textCol?.querySelector('.app-promo-description');
-  if (description) {
-    description.dataset.aueProp = 'description';
-    description.dataset.aueType = 'richtext';
-    description.dataset.aueLabel = 'Descripción';
-  }
-
-  // Lista de características
-  const features = textCol?.querySelector('.app-promo-features');
-  if (features) {
-    features.dataset.aueProp = 'features';
-    features.dataset.aueType = 'richtext';
-    features.dataset.aueLabel = 'Lista de características';
+  // Contenido de texto (richtext)
+  if (textCol) {
+    textCol.dataset.aueProp = 'text';
+    textCol.dataset.aueType = 'richtext';
+    textCol.dataset.aueLabel = 'Contenido';
   }
 
   // Imagen del teléfono
-  const phonePicture = imageCol?.querySelector('picture');
-  if (phonePicture) {
-    phonePicture.dataset.aueProp = 'phoneImage';
-    phonePicture.dataset.aueType = 'media';
-    phonePicture.dataset.aueLabel = 'Imagen del teléfono';
+  if (imageCol) {
+    imageCol.dataset.aueProp = 'image';
+    imageCol.dataset.aueType = 'media';
+    imageCol.dataset.aueLabel = 'Imagen del teléfono';
   }
 }

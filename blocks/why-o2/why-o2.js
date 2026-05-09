@@ -78,7 +78,7 @@ export default function decorate(block) {
 
   // Título de sección
   if (heading) {
-    heading.dataset.aueProp = 'sectionTitle';
+    heading.dataset.aueProp = 'heading';
     heading.dataset.aueType = 'text';
     heading.dataset.aueLabel = 'Título de sección';
   }
@@ -113,7 +113,7 @@ export default function decorate(block) {
     // Título de tarjeta
     const cardTitle = card.querySelector('.why-o2-card-title');
     if (cardTitle) {
-      cardTitle.dataset.aueProp = 'cardTitle';
+      cardTitle.dataset.aueProp = 'itemHeading';
       cardTitle.dataset.aueType = 'text';
       cardTitle.dataset.aueLabel = 'Título de la tarjeta';
     }
@@ -121,7 +121,7 @@ export default function decorate(block) {
     // Texto descriptivo
     const cardText = card.querySelector('.why-o2-card-text');
     if (cardText) {
-      cardText.dataset.aueProp = 'cardText';
+      cardText.dataset.aueProp = 'itemDescription';
       cardText.dataset.aueType = 'richtext';
       cardText.dataset.aueLabel = 'Texto descriptivo';
     }
