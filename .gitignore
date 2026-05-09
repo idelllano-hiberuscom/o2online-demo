@@ -2,7 +2,7 @@
 coverage/*
 logs/*
 node_modules/*
-
+.github/*
 helix-importer-ui
 .DS_Store
 *.bak
