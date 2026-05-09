@@ -129,8 +129,7 @@ export default function decorate(block) {
 
   // --- 6. UE INSTRUMENTATION (xwalk) ---
 
-  // Contenedor raíz
-  block.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/pricing-tabs`;
+  // Block-level: keep existing data-aue-resource from AEM
   block.dataset.aueType = 'component';
   block.dataset.aueModel = 'pricing-tabs';
   block.dataset.aueLabel = 'Pricing Tabs';
@@ -143,18 +142,20 @@ export default function decorate(block) {
   }
 
   // Contenedor de tarjetas (items repetibles)
-  cardsGrid.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/pricing-tabs`;
+  if (block.dataset.aueResource) {
+    cardsGrid.dataset.aueResource = block.dataset.aueResource;
+  }
   cardsGrid.dataset.aueType = 'container';
   cardsGrid.dataset.aueFilter = 'pricing-tabs';
   cardsGrid.dataset.aueBehavior = 'component';
   cardsGrid.dataset.aueLabel = 'Tarjetas de precio';
 
-  // Items individuales de tarjeta
-  cardRows.forEach((card, index) => {
-    card.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/pricing-tabs/item${index}`;
+  // Items individuales — preserve AEM-injected data-aue-resource from rows
+  cardRows.forEach((card) => {
     card.dataset.aueType = 'component';
     card.dataset.aueModel = 'pricing-tabs-card';
-    card.dataset.aueLabel = `Tarjeta ${index + 1}`;
+    card.dataset.aueLabel = card.querySelector('.pricing-tabs-card-title')?.textContent?.trim()
+      || 'Tarjeta';
 
     // Datos de tarifa (richtext)
     const cardTitle = card.querySelector('.pricing-tabs-card-title');

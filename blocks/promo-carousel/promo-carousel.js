@@ -101,8 +101,7 @@ export default function decorate(block) {
 
   // --- 5. UE INSTRUMENTATION (xwalk) ---
 
-  // Contenedor raíz
-  block.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/promo-carousel`;
+  // Block-level: keep existing data-aue-resource from AEM
   block.dataset.aueType = 'component';
   block.dataset.aueModel = 'promo-carousel';
   block.dataset.aueLabel = 'Carrusel de Promociones';
@@ -122,18 +121,20 @@ export default function decorate(block) {
   }
 
   // Contenedor de tarjetas (items repetibles)
-  track.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/promo-carousel`;
+  if (block.dataset.aueResource) {
+    track.dataset.aueResource = block.dataset.aueResource;
+  }
   track.dataset.aueType = 'container';
   track.dataset.aueFilter = 'promo-carousel';
   track.dataset.aueBehavior = 'component';
   track.dataset.aueLabel = 'Tarjetas de promoción';
 
-  // Items individuales de tarjeta
-  cardRows.forEach((card, index) => {
-    card.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/promo-carousel/item${index}`;
+  // Items individuales — preserve AEM-injected data-aue-resource from rows
+  cardRows.forEach((card) => {
     card.dataset.aueType = 'component';
     card.dataset.aueModel = 'promo-carousel-item';
-    card.dataset.aueLabel = `Tarjeta ${index + 1}`;
+    card.dataset.aueLabel = card.querySelector('.promo-carousel-card-title')?.textContent?.trim()
+      || 'Tarjeta';
 
     // Imagen
     const picture = card.querySelector('picture');

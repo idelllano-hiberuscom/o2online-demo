@@ -50,8 +50,7 @@ export default function decorate(block) {
 
   // --- INSTRUMENTACIÓN UE (xwalk) ---
 
-  // Bloque raíz: componente simple (no container)
-  block.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/support-cta`;
+  // Block-level: keep existing data-aue-resource from AEM
   block.dataset.aueType = 'component';
   block.dataset.aueModel = 'support-cta';
   block.dataset.aueLabel = 'Support CTA';

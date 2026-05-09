@@ -61,8 +61,7 @@ export default function decorate(block) {
 
   // --- INSTRUMENTACIÓN UE (xwalk) ---
 
-  // Contenedor raíz
-  block.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/benefits-cards`;
+  // Block-level: keep existing data-aue-resource from AEM
   block.dataset.aueType = 'component';
   block.dataset.aueModel = 'benefits-cards';
   block.dataset.aueLabel = 'Benefits Cards';
@@ -82,19 +81,21 @@ export default function decorate(block) {
   }
 
   // Grid como contenedor de tarjetas (items repetibles)
-  grid.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/benefits-cards`;
+  if (block.dataset.aueResource) {
+    grid.dataset.aueResource = block.dataset.aueResource;
+  }
   grid.dataset.aueType = 'container';
   grid.dataset.aueFilter = 'benefits-cards';
   grid.dataset.aueBehavior = 'component';
   grid.dataset.aueLabel = 'Tarjetas Benefits';
 
-  // Tarjetas individuales
+  // Tarjetas individuales — preserve AEM-injected data-aue-resource
   const cards = grid.querySelectorAll('.benefits-cards-card');
-  cards.forEach((card, index) => {
-    card.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/benefits-cards/item${index}`;
+  cards.forEach((card) => {
     card.dataset.aueType = 'component';
     card.dataset.aueModel = 'benefits-cards-item';
-    card.dataset.aueLabel = `Tarjeta ${index + 1}`;
+    card.dataset.aueLabel = card.querySelector('.benefits-cards-card-title')?.textContent?.trim()
+      || 'Tarjeta';
 
     // Icono
     const picture = card.querySelector('.benefits-cards-card-icon picture');

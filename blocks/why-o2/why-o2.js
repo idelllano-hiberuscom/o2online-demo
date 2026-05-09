@@ -71,8 +71,7 @@ export default function decorate(block) {
 
   // --- INSTRUMENTACIÓN UE (xwalk) ---
 
-  // Contenedor raíz
-  block.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/why-o2`;
+  // Block-level: keep existing data-aue-resource from AEM, add model/type
   block.dataset.aueType = 'component';
   block.dataset.aueModel = 'why-o2';
   block.dataset.aueLabel = 'Why O2';
@@ -85,19 +84,23 @@ export default function decorate(block) {
   }
 
   // Grid como contenedor de tarjetas (items repetibles)
-  grid.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/why-o2`;
+  // Copy block's aue-resource to the new grid container
+  if (block.dataset.aueResource) {
+    grid.dataset.aueResource = block.dataset.aueResource;
+  }
   grid.dataset.aueType = 'container';
   grid.dataset.aueFilter = 'why-o2';
   grid.dataset.aueBehavior = 'component';
   grid.dataset.aueLabel = 'Tarjetas Why O2';
 
-  // Tarjetas individuales
+  // Tarjetas individuales — preserve AEM-injected data-aue-resource from rows
   const cards = grid.querySelectorAll('.why-o2-card');
-  cards.forEach((card, index) => {
-    card.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/why-o2/item${index}`;
+  cards.forEach((card) => {
+    // card already has data-aue-resource from AEM (it's the original row div)
     card.dataset.aueType = 'component';
     card.dataset.aueModel = 'why-o2-item';
-    card.dataset.aueLabel = `Tarjeta ${index + 1}`;
+    card.dataset.aueLabel = card.querySelector('.why-o2-card-title')?.textContent?.trim()
+      || 'Tarjeta';
 
     // Icono
     const picture = card.querySelector('.why-o2-card-icon picture');

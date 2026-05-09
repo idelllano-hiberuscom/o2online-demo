@@ -92,8 +92,7 @@ export default function decorate(block) {
 
   // --- INSTRUMENTACIÓN UE (xwalk) ---
 
-  // Contenedor raíz
-  block.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/app-promo`;
+  // Block-level: keep existing data-aue-resource from AEM
   block.dataset.aueType = 'component';
   block.dataset.aueModel = 'app-promo';
   block.dataset.aueLabel = 'App Promo';

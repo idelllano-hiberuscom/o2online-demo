@@ -58,8 +58,7 @@ export default function decorate(block) {
 
   // --- INSTRUMENTACIÓN UE (xwalk) ---
 
-  // Contenedor raíz — componente hero
-  block.dataset.aueResource = `urn:aemconnection:${window.location.pathname}/jcr:content/hero`;
+  // Block-level: keep existing data-aue-resource from AEM
   block.dataset.aueType = 'component';
   block.dataset.aueModel = 'hero';
   block.dataset.aueLabel = 'Hero';
