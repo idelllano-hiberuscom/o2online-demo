@@ -1,0 +1,61 @@
+[
+  {
+    "id": "promo-carousel",
+    "fields": [
+      {
+        "component": "text",
+        "name": "sectionTitle",
+        "value": "",
+        "label": "Título de sección",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "subtitle",
+        "value": "",
+        "label": "Subtítulo",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "promo-carousel-item",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "value": "",
+        "label": "Imagen",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "badgeText",
+        "value": "",
+        "label": "Texto del badge",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "cardTitle",
+        "value": "",
+        "label": "Título de la tarjeta",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "cardLink",
+        "value": "",
+        "label": "Enlace",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "cardLinkText",
+        "value": "",
+        "label": "Texto del enlace",
+        "valueType": "string"
+      }
+    ]
+  }
+]

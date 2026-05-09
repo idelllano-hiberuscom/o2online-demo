@@ -1,0 +1,139 @@
+/**
+ * Coverage CTA Block — Styles
+ * Figma reference: coverage-cta (banner CTA cobertura O2)
+ * Model: xwalk (EDS + Universal Editor)
+ */
+
+/* 1. Variables locales del bloque */
+.coverage-cta {
+  --coverage-bg: #0050ff;
+  --coverage-text-color: #fff;
+  --coverage-btn-bg: #fff;
+  --coverage-btn-color: #0050ff;
+  --coverage-btn-radius: 60px;
+  --coverage-icon-size: 40px;
+  --coverage-padding-y: 20px;
+  --coverage-padding-x: 15px;
+
+  /* 2. Contenedor raíz */
+  background-color: var(--coverage-bg);
+  padding: var(--coverage-padding-y) var(--coverage-padding-x);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 3. Fila (hijo directo — la entrega EDS) */
+.coverage-cta > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 4. Columnas — reset base */
+.coverage-cta > div > div {
+  margin: 0;
+  padding: 0;
+}
+
+/* 5. Icono */
+.coverage-cta-icon {
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.coverage-cta-icon picture {
+  display: inline-block;
+  width: var(--coverage-icon-size);
+  height: var(--coverage-icon-size);
+}
+
+.coverage-cta-icon picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 6. Texto descriptivo */
+.coverage-cta-text {
+  color: var(--coverage-text-color);
+  font-family: var(--body-font-family);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.coverage-cta-text p {
+  margin: 0;
+}
+
+/* 7. Columna de acción (CTA) */
+.coverage-cta-action {
+  width: 100%;
+}
+
+.coverage-cta-action p {
+  margin: 0;
+}
+
+/* 8. Botón CTA */
+.coverage-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 32px;
+  background-color: var(--coverage-btn-bg);
+  color: var(--coverage-btn-color);
+  font-family: var(--body-font-family);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--coverage-btn-radius);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 9. Estados interactivos */
+.coverage-cta-button:hover {
+  background-color: #e6e6e6;
+  color: var(--coverage-btn-color);
+}
+
+.coverage-cta-button:focus-visible {
+  outline: 2px solid var(--coverage-text-color);
+  outline-offset: 2px;
+}
+
+/* 10. Media queries (mobile-first) */
+@media (width >= 768px) {
+  .coverage-cta > div {
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+    text-align: left;
+  }
+
+  .coverage-cta-action {
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  .coverage-cta-button {
+    width: auto;
+  }
+}
+
+@media (width >= 1024px) {
+  .coverage-cta-icon picture {
+    width: 50px;
+    height: 50px;
+  }
+
+  .coverage-cta-text {
+    font-size: 1.125rem;
+  }
+}

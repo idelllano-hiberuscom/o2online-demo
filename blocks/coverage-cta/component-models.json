@@ -1,0 +1,35 @@
+[
+  {
+    "id": "coverage-cta",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "icon",
+        "value": "",
+        "label": "Icono",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "description",
+        "value": "",
+        "label": "Texto descriptivo",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "ctaText",
+        "value": "",
+        "label": "Texto del botón",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "ctaLink",
+        "value": "",
+        "label": "Enlace del botón",
+        "valueType": "string"
+      }
+    ]
+  }
+]

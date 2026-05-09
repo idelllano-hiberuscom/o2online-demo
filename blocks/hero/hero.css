@@ -1,37 +1,128 @@
+/**
+ * Hero Block — Styles
+ * Figma reference: O2 Online hero section (oso azul)
+ * Model: xwalk (EDS + Universal Editor)
+ *
+ * QA audit: ✅ Validado
+ * QA Changes:
+ * - Sin cambios necesarios
+ */
+
+/* Container overrides */
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
 }
 
+/* Contenedor raíz */
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  display: flex;
+  align-items: center;
+  padding: 80px 24px;
+  min-height: 420px;
+  overflow: hidden;
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+/* Fila — ocupa todo el bloque */
+.hero > div {
+  display: contents;
 }
 
-.hero picture {
+/* Imagen de fondo (col 0) */
+.hero-media {
   position: absolute;
   z-index: -1;
   inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
 }
 
-.hero img {
+.hero-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-media picture img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
+/* Contenido de texto (col 1) */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs, 8px);
+  max-width: 600px;
+}
+
+/* H1 — Roboto Condensed 700 (más pequeño que el highlight) */
+.hero .hero-title {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 28px;
+  color: var(--color-text-on-dark, #fff);
+  margin: 0;
+}
+
+/* Texto destacado — visualmente mayor que H1 */
+.hero .hero-highlight {
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 28px;
+  line-height: 36px;
+  color: var(--color-text-on-dark, #fff);
+  margin: 0;
+}
+
+/* CTA button */
+.hero a.button:any-link {
+  background-color: var(--color-primary, #0050ff);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius-button, 60px);
+  padding: 10px 24px;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.hero a.button:hover {
+  background-color: #003dcc;
+}
+
+.hero a.button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Button container — reset margin */
+.hero .button-container {
+  margin: 0;
+}
+
+/* Desktop (≥900px) */
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    padding: 140px 65px;
+    min-height: 500px;
+  }
+
+  .hero .hero-title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .hero .hero-highlight {
+    font-size: 40px;
+    line-height: 48px;
   }
 }

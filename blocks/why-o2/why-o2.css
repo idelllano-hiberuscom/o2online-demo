@@ -1,0 +1,131 @@
+/**
+ * Why O2 Block — Styles
+ * Figma reference: 6:203 (mobile), 6:786 (desktop)
+ * Model: xwalk (EDS + Universal Editor)
+ *
+ * QA audit: ✅ Validado
+ * QA Changes:
+ * - Sin cambios necesarios
+ */
+
+/* 1. Variables locales del bloque */
+.why-o2 {
+  --why-o2-card-bg: #fff;
+  --why-o2-card-radius: 16px;
+  --why-o2-card-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+  --why-o2-card-padding: 24px 16px;
+  --why-o2-icon-size: 66px;
+  --why-o2-title-color: #000019;
+  --why-o2-text-color: #4a4a4a;
+
+  /* 2. Contenedor raíz */
+  padding: 40px 16px;
+  text-align: center;
+}
+
+/* 3. Header row — pass-through wrappers */
+.why-o2-header {
+  margin-bottom: 24px;
+}
+
+.why-o2-title {
+  color: var(--why-o2-title-color);
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* 4. Grid container for cards */
+.why-o2-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 5. Card (each row: icon col + body col stacked vertically) */
+.why-o2-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: var(--why-o2-card-bg);
+  border-radius: var(--why-o2-card-radius);
+  box-shadow: var(--why-o2-card-shadow);
+  padding: var(--why-o2-card-padding);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 6. Icon wrapper */
+.why-o2-card-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.why-o2-card-icon picture,
+.why-o2-card-icon img {
+  width: var(--why-o2-icon-size);
+  height: var(--why-o2-icon-size);
+}
+
+/* 7. Card body */
+.why-o2-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.why-o2-card-title {
+  color: var(--why-o2-title-color);
+  font-family: var(--heading-font-family);
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 8px;
+}
+
+.why-o2-card-text {
+  color: var(--why-o2-text-color);
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* 8. Hover state — pointer devices only */
+@media (hover: hover) {
+  .why-o2-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+  }
+}
+
+/* 9. Focus visible */
+.why-o2-card:focus-visible {
+  outline: 2px solid var(--link-color, #0050ff);
+  outline-offset: 2px;
+}
+
+/* 10. Responsive — Tablet */
+@media (width >= 768px) {
+  .why-o2-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why-o2-title {
+    font-size: 46px;
+  }
+}
+
+/* 11. Responsive — Desktop */
+@media (width >= 1024px) {
+  .why-o2 {
+    padding: 64px 16px;
+  }
+
+  .why-o2-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

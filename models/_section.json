@@ -50,7 +50,14 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "coverage-cta",
+        "pricing-tabs",
+        "promo-carousel",
+        "why-o2",
+        "app-promo",
+        "benefits-cards",
+        "support-cta"
       ]
     }
   ]

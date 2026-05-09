@@ -15,7 +15,20 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
+      "fragment",
+      "coverage-cta",
+      "pricing-tabs",
+      "promo-carousel",
+      "why-o2",
+      "app-promo",
+      "benefits-cards",
+      "support-cta"
+    ]
+  },
+  {
+    "id": "benefits-cards",
+    "components": [
+      "benefits-cards-item"
     ]
   },
   {
@@ -37,6 +50,25 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "pricing-tabs",
+    "components": [
+      "pricing-tabs-tab",
+      "pricing-tabs-card"
+    ]
+  },
+  {
+    "id": "promo-carousel",
+    "components": [
+      "promo-carousel-item"
+    ]
+  },
+  {
+    "id": "why-o2",
+    "components": [
+      "why-o2-item"
     ]
   }
 ]

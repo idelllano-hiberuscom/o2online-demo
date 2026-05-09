@@ -142,6 +142,112 @@
     ]
   },
   {
+    "id": "app-promo",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "value": "",
+        "label": "Título",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "value": "",
+        "label": "Descripción",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "features",
+        "value": "",
+        "label": "Lista de características",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "appStoreLink",
+        "value": "",
+        "label": "Enlace App Store",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "appStoreBadge",
+        "value": "",
+        "label": "Imagen badge App Store",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "googlePlayLink",
+        "value": "",
+        "label": "Enlace Google Play",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "googlePlayBadge",
+        "value": "",
+        "label": "Imagen badge Google Play",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "phoneImage",
+        "value": "",
+        "label": "Imagen del teléfono",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "benefits-cards",
+    "fields": [
+      {
+        "component": "text",
+        "name": "sectionTitle",
+        "value": "",
+        "label": "Título de sección",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "subtitle",
+        "value": "",
+        "label": "Subtítulo",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "benefits-cards-item",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "icon",
+        "value": "",
+        "label": "Icono",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "cardTitle",
+        "value": "",
+        "label": "Título",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "cardText",
+        "value": "",
+        "label": "Texto descriptivo",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -180,6 +286,39 @@
     ]
   },
   {
+    "id": "coverage-cta",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "icon",
+        "value": "",
+        "label": "Icono",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "description",
+        "value": "",
+        "label": "Texto descriptivo",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "ctaText",
+        "value": "",
+        "label": "Texto del botón",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "ctaLink",
+        "value": "",
+        "label": "Enlace del botón",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
@@ -211,6 +350,235 @@
         "name": "text",
         "value": "",
         "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "pricing-tabs",
+    "fields": [
+      {
+        "component": "text",
+        "name": "sectionTitle",
+        "value": "",
+        "label": "Título de sección",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "lmaBannerText",
+        "value": "",
+        "label": "Texto banner líneas adicionales",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "lmaBannerLink",
+        "value": "",
+        "label": "Enlace banner líneas adicionales",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "pricing-tabs-tab",
+    "fields": [
+      {
+        "component": "text",
+        "name": "tabName",
+        "value": "",
+        "label": "Nombre de tab",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "pricing-tabs-card",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "tariffInfo",
+        "value": "",
+        "label": "Datos de tarifa",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "price",
+        "value": "",
+        "label": "Precio",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "priceNote",
+        "value": "",
+        "label": "Texto de precio",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkMore",
+        "value": "",
+        "label": "Enlace Saber más",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkMoreText",
+        "value": "",
+        "label": "Texto Saber más",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkBuy",
+        "value": "",
+        "label": "Enlace Lo quiero",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkBuyText",
+        "value": "",
+        "label": "Texto Lo quiero",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "tabCategory",
+        "value": "",
+        "label": "Categoría de tab",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "promo-carousel",
+    "fields": [
+      {
+        "component": "text",
+        "name": "sectionTitle",
+        "value": "",
+        "label": "Título de sección",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "subtitle",
+        "value": "",
+        "label": "Subtítulo",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "promo-carousel-item",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "value": "",
+        "label": "Imagen",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "badgeText",
+        "value": "",
+        "label": "Texto del badge",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "cardTitle",
+        "value": "",
+        "label": "Título de la tarjeta",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "cardLink",
+        "value": "",
+        "label": "Enlace",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "cardLinkText",
+        "value": "",
+        "label": "Texto del enlace",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "support-cta",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "icon",
+        "value": "",
+        "label": "Icono",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "mainText",
+        "value": "",
+        "label": "Texto principal",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "value": "",
+        "label": "Texto del enlace",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkUrl",
+        "value": "",
+        "label": "URL del enlace",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "why-o2",
+    "fields": [
+      {
+        "component": "text",
+        "name": "sectionTitle",
+        "value": "",
+        "label": "Título de sección",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "why-o2-item",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "icon",
+        "value": "",
+        "label": "Icono",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "cardTitle",
+        "value": "",
+        "label": "Título",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "cardText",
+        "value": "",
+        "label": "Texto descriptivo",
         "valueType": "string"
       }
     ]

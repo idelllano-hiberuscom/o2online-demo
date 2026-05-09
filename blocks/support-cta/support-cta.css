@@ -1,0 +1,118 @@
+/**
+ * Support CTA Block — Styles
+ * Figma reference: 6:417 (mobile), 6:997 (desktop)
+ * Model: xwalk (EDS + Universal Editor)
+ */
+
+/* 1. Variables locales */
+.support-cta {
+  --support-bg: #f9f9f9;
+  --support-text-color: var(--color-text-primary, #4a4a4a);
+  --support-link-color: var(--color-text-link, #0050ff);
+  --support-icon-size: 60px;
+  --support-padding-y: 32px;
+  --support-padding-x: 15px;
+
+  /* 2. Contenedor raíz */
+  background-color: var(--support-bg);
+  padding: var(--support-padding-y) var(--support-padding-x);
+  max-width: 1264px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* 3. Fila — mobile-first: vertical apilado centrado */
+.support-cta-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+/* 4. Icono */
+.support-cta-icon {
+  flex-shrink: 0;
+  width: var(--support-icon-size);
+  height: var(--support-icon-size);
+  line-height: 0;
+}
+
+.support-cta-icon picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.support-cta-icon picture img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 5. Contenido (texto + enlace) */
+.support-cta-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 6. Texto principal */
+.support-cta-text {
+  font-family: var(--font-family-heading, 'Roboto Condensed', sans-serif);
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 700;
+  color: var(--support-text-color);
+  margin: 0;
+}
+
+/* 7. Enlace */
+.support-cta-link {
+  font-family: var(--font-family-body, 'Roboto', sans-serif);
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 300;
+  color: var(--support-link-color);
+  text-decoration: none;
+}
+
+/* 8. Estados interactivos */
+.support-cta-link:hover {
+  text-decoration: underline;
+}
+
+.support-cta-link:focus-visible {
+  outline: 2px solid var(--support-link-color);
+  outline-offset: 2px;
+}
+
+/* 9. Tablet (≥768px) — horizontal */
+@media (width >= 768px) {
+  .support-cta-row {
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .support-cta-content {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+/* 10. Desktop (≥1024px) */
+@media (width >= 1024px) {
+  .support-cta-text {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .support-cta-link {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

@@ -1,0 +1,101 @@
+[
+  {
+    "id": "pricing-tabs",
+    "fields": [
+      {
+        "component": "text",
+        "name": "sectionTitle",
+        "value": "",
+        "label": "Título de sección",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "lmaBannerText",
+        "value": "",
+        "label": "Texto banner líneas adicionales",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "lmaBannerLink",
+        "value": "",
+        "label": "Enlace banner líneas adicionales",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "pricing-tabs-tab",
+    "fields": [
+      {
+        "component": "text",
+        "name": "tabName",
+        "value": "",
+        "label": "Nombre de tab",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "pricing-tabs-card",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "tariffInfo",
+        "value": "",
+        "label": "Datos de tarifa",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "price",
+        "value": "",
+        "label": "Precio",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "priceNote",
+        "value": "",
+        "label": "Texto de precio",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkMore",
+        "value": "",
+        "label": "Enlace Saber más",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkMoreText",
+        "value": "",
+        "label": "Texto Saber más",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkBuy",
+        "value": "",
+        "label": "Enlace Lo quiero",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkBuyText",
+        "value": "",
+        "label": "Texto Lo quiero",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "tabCategory",
+        "value": "",
+        "label": "Categoría de tab",
+        "valueType": "string"
+      }
+    ]
+  }
+]

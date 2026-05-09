@@ -1,0 +1,372 @@
+/**
+ * Pricing Tabs Block — Styles
+ * Figma reference: 6:12 (mobile), 6:601 (desktop)
+ * Model: xwalk (EDS + Universal Editor)
+ */
+
+/* 1. Block-level custom properties */
+.pricing-tabs {
+  --pricing-bg: #f5f5f5;
+  --pricing-card-bg: #fff;
+  --pricing-card-radius: 16px;
+  --pricing-card-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+  --pricing-tab-active-bg: #0050ff;
+  --pricing-tab-active-color: #fff;
+  --pricing-tab-inactive-bg: transparent;
+  --pricing-tab-inactive-color: #4a4a4a;
+  --pricing-tab-inactive-border: 1px solid #dadada;
+  --pricing-tab-radius: 60px;
+  --pricing-cta-primary-bg: #0050ff;
+  --pricing-cta-primary-color: #fff;
+  --pricing-cta-secondary-bg: transparent;
+  --pricing-cta-secondary-color: #0050ff;
+  --pricing-cta-secondary-border: 1px solid #0050ff;
+  --pricing-lma-bg: #000019;
+  --pricing-lma-color: #fff;
+
+  /* 2. Root container */
+  background-color: var(--pricing-bg);
+  padding: 40px 16px;
+  font-family: var(--body-font-family);
+  box-sizing: border-box;
+}
+
+/* 3. Title row */
+.pricing-tabs-title-row {
+  text-align: center;
+}
+
+.pricing-tabs-title-row > div {
+  margin: 0;
+  padding: 0;
+}
+
+.pricing-tabs-title {
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 900;
+  color: #000019;
+  text-align: center;
+  margin: 0 0 24px;
+}
+
+/* 4. Tablist container (scroll gradient overlay) */
+.pricing-tabs-tablist-container {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.pricing-tabs-tablist-container::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, var(--pricing-bg));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 5. Tablist */
+.pricing-tabs-tablist {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px;
+}
+
+.pricing-tabs-tablist::-webkit-scrollbar {
+  display: none;
+}
+
+/* 6. Tab buttons */
+.pricing-tabs-tab {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  appearance: none;
+  border: var(--pricing-tab-inactive-border);
+  background: var(--pricing-tab-inactive-bg);
+  color: var(--pricing-tab-inactive-color);
+  border-radius: var(--pricing-tab-radius);
+  padding: 8px 20px;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.pricing-tabs-tab-active {
+  background: var(--pricing-tab-active-bg);
+  color: var(--pricing-tab-active-color);
+  border-color: var(--pricing-tab-active-bg);
+}
+
+.pricing-tabs-tab:focus-visible {
+  outline: 2px solid var(--pricing-tab-active-bg);
+  outline-offset: 2px;
+}
+
+.pricing-tabs-tab:hover:not(.pricing-tabs-tab-active) {
+  border-color: var(--pricing-tab-active-bg);
+  color: var(--pricing-tab-active-bg);
+}
+
+/* 7. Panel */
+.pricing-tabs-panel {
+  transition: opacity 0.3s ease;
+}
+
+/* 8. Cards grid */
+.pricing-tabs-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.pricing-tabs-panel-empty .pricing-tabs-cards {
+  display: none;
+}
+
+/* 9. Card */
+.pricing-tabs-card {
+  background: var(--pricing-card-bg);
+  border-radius: var(--pricing-card-radius);
+  box-shadow: var(--pricing-card-shadow);
+  padding: 24px;
+  width: 280px;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: box-shadow 0.2s ease;
+}
+
+.pricing-tabs-card:hover {
+  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+}
+
+/* 10. Card info (col 0) */
+.pricing-tabs-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pricing-tabs-card-title {
+  font-family: var(--heading-font-family);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 700;
+  color: #000019;
+  margin: 0;
+}
+
+.pricing-tabs-card-title strong {
+  font-weight: 900;
+}
+
+.pricing-tabs-card-price {
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--pricing-tab-inactive-color);
+  margin: 0;
+}
+
+/* 11. Card actions (col 1) */
+.pricing-tabs-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.pricing-tabs-card-actions p {
+  margin: 0;
+  flex: 1;
+  display: flex;
+}
+
+/* 12. CTA buttons */
+.pricing-tabs-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: var(--pricing-tab-radius);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pricing-tabs-cta-primary {
+  background: var(--pricing-cta-primary-bg);
+  color: var(--pricing-cta-primary-color);
+}
+
+.pricing-tabs-cta-primary:hover {
+  background: #003cc7;
+}
+
+.pricing-tabs-cta-primary:focus-visible {
+  outline: 2px solid var(--pricing-cta-primary-bg);
+  outline-offset: 2px;
+}
+
+.pricing-tabs-cta-secondary {
+  background: var(--pricing-cta-secondary-bg);
+  color: var(--pricing-cta-secondary-color);
+  border: var(--pricing-cta-secondary-border);
+}
+
+.pricing-tabs-cta-secondary:hover {
+  background: rgb(0 80 255 / 8%);
+}
+
+.pricing-tabs-cta-secondary:focus-visible {
+  outline: 2px solid var(--pricing-cta-secondary-color);
+  outline-offset: 2px;
+}
+
+/* 13. LMA Banner */
+.pricing-tabs-lma {
+  background: var(--pricing-lma-bg);
+  color: var(--pricing-lma-color);
+  border-radius: var(--pricing-card-radius);
+  padding: 20px 24px;
+  margin: 16px auto 0;
+  width: 100%;
+  max-width: 360px;
+  min-height: 80px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.pricing-tabs-lma > div {
+  width: 100%;
+}
+
+.pricing-tabs-lma p {
+  margin: 0;
+}
+
+.pricing-tabs-lma-link {
+  color: var(--pricing-lma-color);
+  text-decoration: none;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.pricing-tabs-lma-link:hover {
+  text-decoration: underline;
+}
+
+.pricing-tabs-lma-link:focus-visible {
+  outline: 2px solid var(--pricing-lma-color);
+  outline-offset: 2px;
+}
+
+/* LMA image hidden on mobile */
+.pricing-tabs-lma picture {
+  display: none;
+}
+
+/* 14. Tablet (768px–1023px) */
+@media (width >= 768px) {
+  .pricing-tabs {
+    padding: 48px 24px;
+  }
+
+  .pricing-tabs-cards {
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .pricing-tabs-card {
+    width: calc(50% - 8px);
+    max-width: 320px;
+  }
+
+  .pricing-tabs-lma {
+    max-width: none;
+  }
+}
+
+/* 15. Desktop (≥1024px) */
+@media (width >= 1024px) {
+  .pricing-tabs {
+    padding: 64px 40px;
+  }
+
+  .pricing-tabs-title {
+    font-size: 46px;
+    line-height: 52px;
+  }
+
+  /* Center tabs — hide scroll gradient */
+  .pricing-tabs-tablist-container::after {
+    display: none;
+  }
+
+  .pricing-tabs-tablist {
+    justify-content: center;
+    overflow-x: visible;
+  }
+
+  /* Cards in horizontal row */
+  .pricing-tabs-cards {
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .pricing-tabs-card {
+    width: 280px;
+    max-width: 280px;
+    flex: 0 0 280px;
+  }
+
+  .pricing-tabs-card-title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  /* LMA full-width, centered, with image visible */
+  .pricing-tabs-lma {
+    max-width: none;
+    min-height: 56px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .pricing-tabs-lma picture {
+    display: inline-block;
+    width: 104px;
+    height: 80px;
+    flex-shrink: 0;
+  }
+
+  .pricing-tabs-lma picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
