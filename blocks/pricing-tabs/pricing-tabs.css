@@ -1,6 +1,5 @@
 /**
  * Pricing Tabs Block — Styles
- * Figma reference: 6:12 (mobile), 6:601 (desktop)
  * Model: xwalk (EDS + Universal Editor)
  */
 
@@ -18,11 +17,8 @@
   --pricing-tab-radius: 60px;
   --pricing-cta-primary-bg: #0050ff;
   --pricing-cta-primary-color: #fff;
-  --pricing-cta-secondary-bg: transparent;
   --pricing-cta-secondary-color: #0050ff;
-  --pricing-cta-secondary-border: 1px solid #0050ff;
-  --pricing-lma-bg: #000019;
-  --pricing-lma-color: #fff;
+  --pricing-banner-bg: #fff;
 
   /* 2. Root container */
   background-color: var(--pricing-bg);
@@ -31,27 +27,32 @@
   box-sizing: border-box;
 }
 
-/* 3. Title row */
-.pricing-tabs-title-row {
-  text-align: center;
+/* 3. Config rows hidden */
+.pricing-tabs-config {
+  display: none;
 }
 
-.pricing-tabs-title-row > div {
-  margin: 0;
-  padding: 0;
+/* 4. Card meta cells hidden */
+.pricing-tabs-card-meta {
+  display: none;
+}
+
+/* 5. Title row */
+.pricing-tabs-title-row {
+  text-align: center;
+  margin-bottom: 24px;
 }
 
 .pricing-tabs-title {
   font-family: var(--heading-font-family);
-  font-size: 36px;
-  line-height: 44px;
+  font-size: 32px;
+  line-height: 40px;
   font-weight: 900;
   color: #000019;
-  text-align: center;
-  margin: 0 0 24px;
+  margin: 0;
 }
 
-/* 4. Tablist container (scroll gradient overlay) */
+/* 6. Tablist container */
 .pricing-tabs-tablist-container {
   position: relative;
   margin-bottom: 24px;
@@ -69,7 +70,7 @@
   z-index: 1;
 }
 
-/* 5. Tablist */
+/* 7. Tablist */
 .pricing-tabs-tablist {
   display: flex;
   gap: 8px;
@@ -84,7 +85,7 @@
   display: none;
 }
 
-/* 6. Tab buttons */
+/* 8. Tab buttons */
 .pricing-tabs-tab {
   flex: 0 0 auto;
   scroll-snap-align: start;
@@ -119,12 +120,7 @@
   color: var(--pricing-tab-active-bg);
 }
 
-/* 7. Panel */
-.pricing-tabs-panel {
-  transition: opacity 0.3s ease;
-}
-
-/* 8. Cards grid */
+/* 9. Cards grid */
 .pricing-tabs-cards {
   display: flex;
   flex-direction: column;
@@ -132,18 +128,14 @@
   gap: 16px;
 }
 
-.pricing-tabs-panel-empty .pricing-tabs-cards {
-  display: none;
-}
-
-/* 9. Card */
+/* 10. Card */
 .pricing-tabs-card {
   background: var(--pricing-card-bg);
   border-radius: var(--pricing-card-radius);
   box-shadow: var(--pricing-card-shadow);
   padding: 24px;
-  width: 280px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 340px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -155,17 +147,17 @@
   box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
 }
 
-/* 10. Card info (col 0) */
+/* 11. Card info */
 .pricing-tabs-card-info {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .pricing-tabs-card-title {
   font-family: var(--heading-font-family);
-  font-size: 22px;
-  line-height: 28px;
+  font-size: 18px;
+  line-height: 24px;
   font-weight: 700;
   color: #000019;
   margin: 0;
@@ -175,33 +167,43 @@
   font-weight: 900;
 }
 
-.pricing-tabs-card-price {
-  font-family: var(--body-font-family);
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--pricing-tab-inactive-color);
+.pricing-tabs-card-detail {
+  font-size: 14px;
+  line-height: 20px;
+  color: #4a4a4a;
   margin: 0;
 }
 
-/* 11. Card actions (col 1) */
+/* 12. Price column */
+.pricing-tabs-card-price-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.pricing-tabs-card-price-col p {
+  margin: 0;
+  text-align: right;
+}
+
+/* 13. Card actions */
 .pricing-tabs-card-actions {
   display: flex;
-  gap: 8px;
+  gap: 12px;
+  align-items: center;
+  margin-top: auto;
 }
 
 .pricing-tabs-card-actions p {
   margin: 0;
-  flex: 1;
-  display: flex;
 }
 
-/* 12. CTA buttons */
+/* 14. CTA buttons */
 .pricing-tabs-cta {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 10px 16px;
+  padding: 10px 20px;
   border-radius: var(--pricing-tab-radius);
   font-family: var(--body-font-family);
   font-size: 14px;
@@ -229,13 +231,13 @@
 }
 
 .pricing-tabs-cta-secondary {
-  background: var(--pricing-cta-secondary-bg);
+  background: transparent;
   color: var(--pricing-cta-secondary-color);
-  border: var(--pricing-cta-secondary-border);
+  text-decoration: none;
 }
 
 .pricing-tabs-cta-secondary:hover {
-  background: rgb(0 80 255 / 8%);
+  text-decoration: underline;
 }
 
 .pricing-tabs-cta-secondary:focus-visible {
@@ -243,53 +245,64 @@
   outline-offset: 2px;
 }
 
-/* 13. LMA Banner */
-.pricing-tabs-lma {
-  background: var(--pricing-lma-bg);
-  color: var(--pricing-lma-color);
+/* 15. Banner (líneas adicionales) */
+.pricing-tabs-banner {
+  background: var(--pricing-banner-bg);
   border-radius: var(--pricing-card-radius);
+  box-shadow: var(--pricing-card-shadow);
   padding: 20px 24px;
-  margin: 16px auto 0;
-  width: 100%;
-  max-width: 360px;
-  min-height: 80px;
-  box-sizing: border-box;
+  margin: 24px auto 0;
+  max-width: 900px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 16px;
 }
 
-.pricing-tabs-lma > div {
+.pricing-tabs-banner-content {
+  flex: 1;
+}
+
+.pricing-tabs-banner-content p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.pricing-tabs-banner-image {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+}
+
+.pricing-tabs-banner-image img {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.pricing-tabs-lma p {
+/* 16. Footer (beneficios) */
+.pricing-tabs-footer {
+  background: var(--pricing-banner-bg);
+  border-radius: var(--pricing-card-radius);
+  box-shadow: var(--pricing-card-shadow);
+  padding: 16px 24px;
+  margin: 16px auto 0;
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.pricing-tabs-footer p {
   margin: 0;
 }
 
-.pricing-tabs-lma-link {
-  color: var(--pricing-lma-color);
-  text-decoration: none;
-  font-family: var(--body-font-family);
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 700;
-}
-
-.pricing-tabs-lma-link:hover {
-  text-decoration: underline;
-}
-
-.pricing-tabs-lma-link:focus-visible {
-  outline: 2px solid var(--pricing-lma-color);
-  outline-offset: 2px;
-}
-
-/* LMA image hidden on mobile */
-.pricing-tabs-lma picture {
-  display: none;
-}
-
-/* 14. Tablet (768px–1023px) */
+/* 17. Tablet */
 @media (width >= 768px) {
   .pricing-tabs {
     padding: 48px 24px;
@@ -303,14 +316,21 @@
   .pricing-tabs-card {
     width: calc(50% - 8px);
     max-width: 320px;
+    flex-direction: row;
+    align-items: flex-start;
   }
 
-  .pricing-tabs-lma {
-    max-width: none;
+  .pricing-tabs-card-info {
+    flex: 1;
+  }
+
+  .pricing-tabs-banner-image {
+    width: 80px;
+    height: 80px;
   }
 }
 
-/* 15. Desktop (≥1024px) */
+/* 18. Desktop */
 @media (width >= 1024px) {
   .pricing-tabs {
     padding: 64px 40px;
@@ -321,7 +341,6 @@
     line-height: 52px;
   }
 
-  /* Center tabs — hide scroll gradient */
   .pricing-tabs-tablist-container::after {
     display: none;
   }
@@ -331,7 +350,6 @@
     overflow-x: visible;
   }
 
-  /* Cards in horizontal row */
   .pricing-tabs-cards {
     flex-flow: row nowrap;
     justify-content: center;
@@ -342,31 +360,25 @@
     width: 280px;
     max-width: 280px;
     flex: 0 0 280px;
+    flex-direction: column;
   }
 
   .pricing-tabs-card-title {
-    font-size: 28px;
-    line-height: 32px;
+    font-size: 22px;
+    line-height: 28px;
   }
 
-  /* LMA full-width, centered, with image visible */
-  .pricing-tabs-lma {
-    max-width: none;
-    min-height: 56px;
-    justify-content: center;
-    text-align: center;
+  .pricing-tabs-banner {
+    max-width: 1100px;
   }
 
-  .pricing-tabs-lma picture {
-    display: inline-block;
+  .pricing-tabs-banner-image {
     width: 104px;
     height: 80px;
-    flex-shrink: 0;
   }
 
-  .pricing-tabs-lma picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  .pricing-tabs-footer {
+    max-width: 1100px;
+    flex-wrap: nowrap;
   }
 }

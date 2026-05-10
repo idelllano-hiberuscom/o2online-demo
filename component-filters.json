@@ -55,7 +55,6 @@
   {
     "id": "pricing-tabs",
     "components": [
-      "pricing-tabs-tab",
       "pricing-tabs-card"
     ]
   },

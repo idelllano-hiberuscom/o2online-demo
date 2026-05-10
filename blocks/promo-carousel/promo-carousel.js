@@ -25,18 +25,30 @@ export default function decorate(block) {
   const rows = [...block.children];
   if (rows.length < 2) return;
 
-  // --- 1. HEADER ROW (row 0) ---
-  const headerRow = rows[0];
-  headerRow.classList.add('promo-carousel-header');
+  // --- 1. SEPARATE HEADER ROWS FROM CARD ROWS ---
+  // Card rows contain a <picture>; everything else is header/config
+  const cardRows = [];
+  rows.forEach((row) => {
+    if (row.querySelector('picture')) {
+      cardRows.push(row);
+    } else {
+      row.classList.add('promo-carousel-header');
+    }
+  });
 
-  const titleEl = headerRow.querySelector('h2');
+  // Find heading and subtitle across all header rows
+  const titleEl = block.querySelector('.promo-carousel-header h2');
   if (titleEl) titleEl.classList.add('promo-carousel-title');
 
-  const subtitleEl = headerRow.querySelector('p');
-  if (subtitleEl) subtitleEl.classList.add('promo-carousel-subtitle');
+  let subtitleEl = null;
+  block.querySelectorAll('.promo-carousel-header p').forEach((p) => {
+    if (!subtitleEl && !p.classList.contains('button-container')) {
+      subtitleEl = p;
+      subtitleEl.classList.add('promo-carousel-subtitle');
+    }
+  });
 
-  // --- 2. CARD ROWS (rows 1..N) → classify and move into track ---
-  const cardRows = rows.slice(1);
+  // --- 2. CARD ROWS → classify and move into track ---
   const track = document.createElement('div');
   track.classList.add('promo-carousel-track');
 

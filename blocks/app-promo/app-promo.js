@@ -24,7 +24,16 @@
  * @param {Element} block - Root element of the block
  */
 export default function decorate(block) {
-  const row = block.children[0];
+  const rows = [...block.children];
+  // Find the main content row (with a <picture>)
+  let row = null;
+  rows.forEach((r) => {
+    if (r.querySelector('picture')) {
+      row = r;
+    } else {
+      r.classList.add('app-promo-config');
+    }
+  });
   if (!row) return;
 
   const cols = [...row.children];

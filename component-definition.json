@@ -235,29 +235,14 @@
           }
         },
         {
-          "title": "Pricing Tab",
-          "id": "pricing-tabs-tab",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "Tab",
-                  "model": "pricing-tabs-tab"
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Pricing Card",
+          "title": "Tarjeta",
           "id": "pricing-tabs-card",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "Card",
+                  "name": "Tarjeta",
                   "model": "pricing-tabs-card"
                 }
               }

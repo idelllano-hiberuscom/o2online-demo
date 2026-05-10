@@ -11,13 +11,16 @@
  * @param {Element} block - Root element of the block
  */
 export default function decorate(block) {
-  const row = block.children[0];
-  if (!row) return;
+  const rows = [...block.children];
 
-  const cols = [...row.children];
+  // Find main row — the one containing the icon picture
+  const mainRow = rows.find((r) => r.querySelector('picture'));
+  if (!mainRow) return;
 
-  // Col 0 — Icono (decorativo)
-  const iconCol = cols[0];
+  const mainCols = [...mainRow.children];
+
+  // Icon col — the cell with picture
+  const iconCol = mainCols.find((c) => c.querySelector('picture'));
   if (iconCol) {
     iconCol.classList.add('coverage-cta-icon');
     const img = iconCol.querySelector('picture img');
@@ -29,50 +32,70 @@ export default function decorate(block) {
     }
   }
 
-  // Col 1 — Texto descriptivo
-  const textCol = cols[1];
+  // Text col — the other cell in the main row
+  const textCol = mainCols.find((c) => c !== iconCol);
   if (textCol) {
     textCol.classList.add('coverage-cta-text');
   }
 
-  // Col 2 — Botón CTA
-  const ctaCol = cols[2];
-  if (ctaCol) {
-    ctaCol.classList.add('coverage-cta-action');
-    const link = ctaCol.querySelector('a');
+  // Gather CTA data from non-main rows (ctaText + cta fields are separate cells)
+  let ctaTextVal = '';
+  let ctaUrlVal = '';
+
+  rows.forEach((r) => {
+    if (r === mainRow) return;
+    const link = r.querySelector('a');
     if (link) {
-      link.classList.add('coverage-cta-button');
+      ctaUrlVal = ctaUrlVal || link.href;
+      ctaTextVal = ctaTextVal || link.textContent.trim();
     }
+    [...r.children].forEach((col) => {
+      const text = col.textContent.trim();
+      if (!text) return;
+      if (/^https?:\/\//.test(text) || text.startsWith('/')) {
+        ctaUrlVal = ctaUrlVal || text;
+      } else if (!ctaTextVal && !col.querySelector('a')) {
+        ctaTextVal = text;
+      }
+    });
+    r.classList.add('coverage-cta-config');
+  });
+
+  // Build CTA button and append to main row
+  if (ctaTextVal || ctaUrlVal) {
+    const actionDiv = document.createElement('div');
+    actionDiv.classList.add('coverage-cta-action');
+    const a = document.createElement('a');
+    a.href = ctaUrlVal || '#';
+    a.textContent = ctaTextVal || 'CTA';
+    a.classList.add('coverage-cta-button');
+    actionDiv.appendChild(a);
+    mainRow.appendChild(actionDiv);
   }
 
   // --- INSTRUMENTACIÓN UE (xwalk) ---
-
-  // Block-level: keep existing data-aue-resource from AEM
   block.dataset.aueType = 'component';
   block.dataset.aueModel = 'coverage-cta';
   block.dataset.aueLabel = 'Coverage CTA';
 
-  // Icono (decorativo — media)
-  const picture = iconCol?.querySelector('picture');
+  const picture = block.querySelector('.coverage-cta-icon picture');
   if (picture) {
     picture.dataset.aueProp = 'icon';
     picture.dataset.aueType = 'media';
     picture.dataset.aueLabel = 'Icono';
   }
 
-  // Texto descriptivo
-  const descP = textCol?.querySelector('p');
+  const descP = block.querySelector('.coverage-cta-text p');
   if (descP) {
     descP.dataset.aueProp = 'description';
     descP.dataset.aueType = 'text';
     descP.dataset.aueLabel = 'Texto descriptivo';
   }
 
-  // CTA — Texto del botón (inline editable)
-  const ctaLink = ctaCol?.querySelector('a');
-  if (ctaLink) {
-    ctaLink.dataset.aueProp = 'ctaText';
-    ctaLink.dataset.aueType = 'text';
-    ctaLink.dataset.aueLabel = 'Texto del botón';
+  const ctaBtn = block.querySelector('.coverage-cta-button');
+  if (ctaBtn) {
+    ctaBtn.dataset.aueProp = 'ctaText';
+    ctaBtn.dataset.aueType = 'text';
+    ctaBtn.dataset.aueLabel = 'Texto del botón';
   }
 }

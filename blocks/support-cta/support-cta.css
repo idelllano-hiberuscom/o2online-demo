@@ -21,7 +21,12 @@
   box-sizing: border-box;
 }
 
-/* 3. Fila — mobile-first: vertical apilado centrado */
+/* 3. Config rows hidden */
+.support-cta-config {
+  display: none;
+}
+
+/* 4. Main row — mobile-first: vertical centered */
 .support-cta-row {
   display: flex;
   flex-direction: column;

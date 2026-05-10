@@ -17,29 +17,14 @@
       }
     },
     {
-      "title": "Pricing Tab",
-      "id": "pricing-tabs-tab",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Tab",
-              "model": "pricing-tabs-tab"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Pricing Card",
+      "title": "Tarjeta",
       "id": "pricing-tabs-card",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "Card",
+              "name": "Tarjeta",
               "model": "pricing-tabs-card"
             }
           }
@@ -59,29 +44,52 @@
           "valueType": "string"
         },
         {
-          "component": "richtext",
-          "name": "lmaBannerText",
-          "value": "",
-          "label": "Texto banner líneas adicionales",
+          "component": "text",
+          "name": "tab1",
+          "value": "Fibra y Móvil",
+          "label": "Tab 1",
           "valueType": "string"
         },
         {
           "component": "text",
-          "name": "lmaBanner",
-          "value": "",
-          "label": "Enlace banner líneas adicionales",
+          "name": "tab2",
+          "value": "Fibra, Móvil y TV",
+          "label": "Tab 2",
           "valueType": "string"
-        }
-      ]
-    },
-    {
-      "id": "pricing-tabs-tab",
-      "fields": [
+        },
         {
           "component": "text",
-          "name": "tabName",
+          "name": "tab3",
+          "value": "Móvil",
+          "label": "Tab 3",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "tab4",
+          "value": "Fibra",
+          "label": "Tab 4",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "bannerText",
           "value": "",
-          "label": "Nombre de tab",
+          "label": "Texto banner inferior",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "name": "bannerImage",
+          "value": "",
+          "label": "Imagen banner inferior",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "footerText",
+          "value": "",
+          "label": "Texto pie (beneficios)",
           "valueType": "string"
         }
       ]
@@ -90,59 +98,72 @@
       "id": "pricing-tabs-card",
       "fields": [
         {
+          "component": "select",
+          "name": "tabCategory",
+          "value": "tab1",
+          "label": "Categoría de tab",
+          "valueType": "string",
+          "options": [
+            { "name": "Fibra y Móvil", "value": "tab1" },
+            { "name": "Fibra, Móvil y TV", "value": "tab2" },
+            { "name": "Móvil", "value": "tab3" },
+            { "name": "Fibra", "value": "tab4" }
+          ]
+        },
+        {
           "component": "richtext",
-          "name": "tariff_info",
+          "name": "cardInfo",
           "value": "",
           "label": "Datos de tarifa",
           "valueType": "string"
         },
         {
           "component": "text",
-          "name": "tariff_price",
+          "name": "cardPrice",
           "value": "",
-          "label": "Precio",
+          "label": "Precio (ej: 35)",
           "valueType": "string"
         },
         {
           "component": "text",
-          "name": "tariff_note",
+          "name": "cardPriceNote",
+          "value": "precio final",
+          "label": "Nota de precio",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "name": "cardBadge",
           "value": "",
-          "label": "Texto de precio",
+          "label": "Icono badge (opcional)",
           "valueType": "string"
         },
         {
           "component": "text",
-          "name": "linkMore",
+          "name": "cardCtaPrimary",
           "value": "",
           "label": "Enlace Saber más",
           "valueType": "string"
         },
         {
           "component": "text",
-          "name": "linkMoreText",
-          "value": "",
+          "name": "cardCtaPrimaryText",
+          "value": "Saber más",
           "label": "Texto Saber más",
           "valueType": "string"
         },
         {
           "component": "text",
-          "name": "linkBuy",
+          "name": "cardCtaSecondary",
           "value": "",
           "label": "Enlace Lo quiero",
           "valueType": "string"
         },
         {
           "component": "text",
-          "name": "linkBuyText",
-          "value": "",
+          "name": "cardCtaSecondaryText",
+          "value": "Lo quiero",
           "label": "Texto Lo quiero",
-          "valueType": "string"
-        },
-        {
-          "component": "select",
-          "name": "tabCategory",
-          "value": "",
-          "label": "Categoría de tab",
           "valueType": "string"
         }
       ]
@@ -152,7 +173,6 @@
     {
       "id": "pricing-tabs",
       "components": [
-        "pricing-tabs-tab",
         "pricing-tabs-card"
       ]
     }

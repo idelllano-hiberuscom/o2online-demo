@@ -26,14 +26,19 @@
 export default function decorate(block) {
   const rows = [...block.children];
 
-  // Row 0: section title
-  const titleRow = rows[0];
-  titleRow.classList.add('why-o2-header');
-  const heading = titleRow.querySelector('h2');
+  // Separate header rows (no picture) from card rows (have icon picture)
+  const cardRows = [];
+  rows.forEach((row) => {
+    if (row.querySelector('picture')) {
+      cardRows.push(row);
+    } else {
+      row.classList.add('why-o2-header');
+    }
+  });
+  const heading = block.querySelector('.why-o2-header h2');
   if (heading) heading.classList.add('why-o2-title');
 
-  // Rows 1+: cards — wrap in a new grid container
-  const cardRows = rows.slice(1);
+  // Card rows — wrap in a new grid container
   const grid = document.createElement('div');
   grid.classList.add('why-o2-grid');
 
