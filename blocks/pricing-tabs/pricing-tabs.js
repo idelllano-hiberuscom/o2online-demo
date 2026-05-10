@@ -120,55 +120,109 @@ export default function decorate(block) {
     row.classList.add('pricing-tabs-card');
     const cols = [...row.children];
 
-    // Try to determine tab category from cell content
-    // The tabCategory field value may be in one of the cells
-    let category = 'tab1'; // default
+    // Map cells by model field order (after collapsible field merging):
+    // 0: tabCategory, 1: cardInfo, 2: cardPrice, 3: cardPriceNote,
+    // 4: cardBadge (picture), 5: cardCtaPrimary (link), 6: cardCtaSecondary
+    let category = 'tab1';
+    const cellData = {
+      info: null, price: null, note: null, badge: null, ctas: [],
+    };
+
     cols.forEach((col) => {
-      const t = col.textContent.trim();
-      if (tabKeys.includes(t)) {
-        category = t;
+      const text = col.textContent.trim();
+      const pic = col.querySelector('picture');
+      const link = col.querySelector('a');
+
+      if (tabKeys.includes(text)) {
+        category = text;
         col.classList.add('pricing-tabs-card-meta');
+      } else if (pic) {
+        cellData.badge = col;
+      } else if (link) {
+        cellData.ctas.push(col);
+      } else if (!cellData.info) {
+        cellData.info = col;
+      } else if (!cellData.price) {
+        cellData.price = col;
+      } else if (!cellData.note) {
+        cellData.note = col;
+      } else {
+        // Extra text cells might be CTA text without <a> wrapping
+        cellData.ctas.push(col);
       }
     });
+
     row.dataset.tabCategory = category;
 
-    // Classify remaining cols
-    const visibleCols = cols.filter((c) => !c.classList.contains('pricing-tabs-card-meta'));
+    // Build structured card layout
+    // -- Top section: info + price side by side --
+    const topSection = document.createElement('div');
+    topSection.classList.add('pricing-tabs-card-top');
 
-    if (visibleCols[0]) {
-      visibleCols[0].classList.add('pricing-tabs-card-info');
-      visibleCols[0].querySelectorAll('h3').forEach((h) => h.classList.add('pricing-tabs-card-title'));
-      visibleCols[0].querySelectorAll('p').forEach((p) => {
-        if (!p.querySelector('a')) p.classList.add('pricing-tabs-card-detail');
+    if (cellData.info) {
+      cellData.info.classList.add('pricing-tabs-card-info');
+      cellData.info.querySelectorAll('h3, strong, b').forEach((el) => {
+        el.closest('div')?.classList.add('pricing-tabs-card-info');
       });
+      topSection.appendChild(cellData.info);
     }
 
-    if (visibleCols[1]) {
-      visibleCols[1].classList.add('pricing-tabs-card-price-col');
+    const priceWrap = document.createElement('div');
+    priceWrap.classList.add('pricing-tabs-card-price');
+    if (cellData.price) {
+      const priceText = cellData.price.textContent.trim();
+      const priceEl = document.createElement('span');
+      priceEl.classList.add('pricing-tabs-card-price-value');
+      priceEl.textContent = priceText;
+      priceWrap.appendChild(priceEl);
     }
+    if (cellData.note) {
+      const noteEl = document.createElement('span');
+      noteEl.classList.add('pricing-tabs-card-price-note');
+      noteEl.textContent = cellData.note.textContent.trim();
+      priceWrap.appendChild(noteEl);
+      cellData.note.classList.add('pricing-tabs-card-meta');
+    }
+    topSection.appendChild(priceWrap);
+    if (cellData.price) cellData.price.classList.add('pricing-tabs-card-meta');
 
-    // Find CTA links in any col
-    const links = row.querySelectorAll('a');
-    if (links.length > 0) {
-      const actionsDiv = row.querySelector('.pricing-tabs-card-actions')
-        || document.createElement('div');
-      actionsDiv.classList.add('pricing-tabs-card-actions');
-
-      links.forEach((a, idx) => {
-        a.classList.add('pricing-tabs-cta');
-        a.classList.add(idx === 0 ? 'pricing-tabs-cta-primary' : 'pricing-tabs-cta-secondary');
-      });
-
-      if (!actionsDiv.parentNode) {
-        // Move link containers into actions div
-        row.querySelectorAll('p').forEach((p) => {
-          if (p.querySelector('a')) {
-            actionsDiv.appendChild(p);
-          }
-        });
-        row.appendChild(actionsDiv);
+    // -- Badge --
+    if (cellData.badge) {
+      cellData.badge.classList.add('pricing-tabs-card-badge');
+      const img = cellData.badge.querySelector('img');
+      if (img) {
+        img.setAttribute('loading', 'lazy');
+        img.setAttribute('decoding', 'async');
       }
     }
+
+    // -- Actions: build CTA buttons --
+    const actionsDiv = document.createElement('div');
+    actionsDiv.classList.add('pricing-tabs-card-actions');
+
+    cellData.ctas.forEach((col, idx) => {
+      let link = col.querySelector('a');
+      if (!link) {
+        // Wrap plain text as an anchor
+        link = document.createElement('a');
+        link.href = '#';
+        link.textContent = col.textContent.trim();
+      }
+      link.classList.add('pricing-tabs-cta');
+      if (idx === 0) {
+        link.classList.add('pricing-tabs-cta-primary');
+      } else {
+        link.classList.add('pricing-tabs-cta-secondary');
+      }
+      actionsDiv.appendChild(link);
+      col.classList.add('pricing-tabs-card-meta');
+    });
+
+    // Clear row and rebuild
+    while (row.firstChild) row.removeChild(row.firstChild);
+    row.appendChild(topSection);
+    if (cellData.badge) row.appendChild(cellData.badge);
+    if (actionsDiv.children.length) row.appendChild(actionsDiv);
 
     cardsGrid.appendChild(row);
   });
@@ -247,7 +301,7 @@ export default function decorate(block) {
   cardRows.forEach((card) => {
     card.dataset.aueType = 'component';
     card.dataset.aueModel = 'pricing-tabs-card';
-    card.dataset.aueLabel = card.querySelector('.pricing-tabs-card-title')?.textContent?.trim()
+    card.dataset.aueLabel = card.querySelector('.pricing-tabs-card-info')?.textContent?.trim()
       || 'Tarjeta';
   });
 

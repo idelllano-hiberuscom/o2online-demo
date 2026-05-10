@@ -13,65 +13,72 @@
 export default function decorate(block) {
   const rows = [...block.children];
 
-  // Find main row — the one containing the icon picture
-  const mainRow = rows.find((r) => r.querySelector('picture'));
-  if (!mainRow) return;
+  // Collect all cells across all rows in model field order
+  // Model fields: icon (reference), description (text), ctaText (text), cta (text)
+  const allCells = [];
+  rows.forEach((r) => [...r.children].forEach((c) => allCells.push(c)));
 
-  const mainCols = [...mainRow.children];
+  const iconCell = allCells.find((c) => c.querySelector('picture'));
+  if (!iconCell) return;
 
-  // Icon col — the cell with picture
-  const iconCol = mainCols.find((c) => c.querySelector('picture'));
-  if (iconCol) {
-    iconCol.classList.add('coverage-cta-icon');
-    const img = iconCol.querySelector('picture img');
-    if (img) {
-      img.setAttribute('loading', 'lazy');
-      img.setAttribute('decoding', 'async');
-      img.setAttribute('alt', '');
-      img.setAttribute('aria-hidden', 'true');
-    }
-  }
+  // Non-icon cells in field order: description, ctaText, cta
+  const contentCells = allCells.filter((c) => c !== iconCell);
+  const descCell = contentCells[0] || null;
 
-  // Text col — the other cell in the main row
-  const textCol = mainCols.find((c) => c !== iconCol);
-  if (textCol) {
-    textCol.classList.add('coverage-cta-text');
-  }
-
-  // Gather CTA data from non-main rows (ctaText + cta fields are separate cells)
+  // ctaText + cta: check for <a> (collapsed) or separate text cells
   let ctaTextVal = '';
-  let ctaUrlVal = '';
-
-  rows.forEach((r) => {
-    if (r === mainRow) return;
-    const link = r.querySelector('a');
+  let ctaUrlVal = '#';
+  if (contentCells[1]) {
+    const link = contentCells[1].querySelector('a');
     if (link) {
-      ctaUrlVal = ctaUrlVal || link.href;
-      ctaTextVal = ctaTextVal || link.textContent.trim();
-    }
-    [...r.children].forEach((col) => {
-      const text = col.textContent.trim();
-      if (!text) return;
-      if (/^https?:\/\//.test(text) || text.startsWith('/')) {
-        ctaUrlVal = ctaUrlVal || text;
-      } else if (!ctaTextVal && !col.querySelector('a')) {
-        ctaTextVal = text;
+      ctaTextVal = link.textContent.trim();
+      ctaUrlVal = link.href;
+    } else {
+      ctaTextVal = contentCells[1].textContent.trim();
+      if (contentCells[2]) {
+        const link2 = contentCells[2].querySelector('a');
+        ctaUrlVal = link2 ? link2.href : (contentCells[2].textContent.trim() || '#');
       }
-    });
-    r.classList.add('coverage-cta-config');
-  });
+    }
+  }
 
-  // Build CTA button and append to main row
-  if (ctaTextVal || ctaUrlVal) {
+  // Build layout in the icon's row
+  const mainRow = iconCell.parentElement;
+
+  // Icon styling
+  iconCell.classList.add('coverage-cta-icon');
+  const img = iconCell.querySelector('picture img');
+  if (img) {
+    img.setAttribute('loading', 'lazy');
+    img.setAttribute('decoding', 'async');
+    img.setAttribute('alt', '');
+    img.setAttribute('aria-hidden', 'true');
+  }
+
+  // Description — move into main row if in a different row
+  if (descCell) {
+    descCell.classList.add('coverage-cta-text');
+    if (descCell.parentElement !== mainRow) {
+      mainRow.appendChild(descCell);
+    }
+  }
+
+  // CTA button
+  if (ctaTextVal) {
     const actionDiv = document.createElement('div');
     actionDiv.classList.add('coverage-cta-action');
     const a = document.createElement('a');
-    a.href = ctaUrlVal || '#';
-    a.textContent = ctaTextVal || 'CTA';
+    a.href = ctaUrlVal;
+    a.textContent = ctaTextVal;
     a.classList.add('coverage-cta-button');
     actionDiv.appendChild(a);
     mainRow.appendChild(actionDiv);
   }
+
+  // Hide remaining rows
+  rows.forEach((r) => {
+    if (r !== mainRow) r.classList.add('coverage-cta-config');
+  });
 
   // --- INSTRUMENTACIÓN UE (xwalk) ---
   block.dataset.aueType = 'component';

@@ -14,16 +14,23 @@
 export default function decorate(block) {
   const rows = [...block.children];
 
-  // Row 0: section header (h2 title + p subtitle)
-  const headerRow = rows[0];
-  headerRow.classList.add('benefits-cards-header');
-  const heading = headerRow.querySelector('h2');
+  // Separate card rows (have <picture>) from config/header rows
+  const cardRows = [];
+  rows.forEach((row) => {
+    if (row.querySelector('picture')) {
+      cardRows.push(row);
+    } else {
+      row.classList.add('benefits-cards-header');
+    }
+  });
+
+  // Find heading and subtitle across header rows
+  const heading = block.querySelector('.benefits-cards-header h2');
   if (heading) heading.classList.add('benefits-cards-title');
-  const subtitle = headerRow.querySelector('p');
+  const subtitle = block.querySelector('.benefits-cards-header p');
   if (subtitle) subtitle.classList.add('benefits-cards-subtitle');
 
-  // Rows 1+: cards — wrap in a new grid container
-  const cardRows = rows.slice(1);
+  // Card rows — wrap in a new grid container
   const grid = document.createElement('div');
   grid.classList.add('benefits-cards-grid');
 

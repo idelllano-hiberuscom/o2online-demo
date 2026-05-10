@@ -56,21 +56,40 @@ export default function decorate(block) {
     row.classList.add('promo-carousel-card');
     const cols = [...row.children];
 
-    // Col 0 — image container
-    if (cols[0]) {
-      cols[0].classList.add('promo-carousel-card-image');
-      // All images are below-the-fold — lazy load
-      cols[0].querySelectorAll('picture img').forEach((img) => {
+    // Separate picture columns from text columns
+    const picCols = [];
+    const textCols = [];
+    cols.forEach((col) => {
+      if (col.querySelector('picture')) {
+        picCols.push(col);
+      } else {
+        textCols.push(col);
+      }
+    });
+
+    // First picture = background image
+    if (picCols[0]) {
+      picCols[0].classList.add('promo-carousel-card-image');
+      picCols[0].querySelectorAll('picture img').forEach((img) => {
         img.setAttribute('loading', 'lazy');
         img.setAttribute('decoding', 'async');
       });
     }
 
-    // Col 1 — content (badge, title, CTA link)
-    if (cols[1]) {
-      cols[1].classList.add('promo-carousel-card-content');
+    // Second picture = overlay image (e.g. product photo)
+    if (picCols[1]) {
+      picCols[1].classList.add('promo-carousel-card-overlay');
+      picCols[1].querySelectorAll('picture img').forEach((img) => {
+        img.setAttribute('loading', 'lazy');
+        img.setAttribute('decoding', 'async');
+      });
+    }
 
-      cols[1].querySelectorAll(':scope > p').forEach((p) => {
+    // First text col = content (badge, title, CTA link)
+    if (textCols[0]) {
+      textCols[0].classList.add('promo-carousel-card-content');
+
+      textCols[0].querySelectorAll(':scope > p').forEach((p) => {
         if (p.querySelector('a')) {
           p.classList.add('promo-carousel-card-cta');
           p.querySelector('a').classList.add('promo-carousel-card-link');
@@ -79,7 +98,7 @@ export default function decorate(block) {
         }
       });
 
-      cols[1].querySelectorAll('h3').forEach((h) => {
+      textCols[0].querySelectorAll('h3').forEach((h) => {
         h.classList.add('promo-carousel-card-title');
       });
     }
@@ -178,6 +197,14 @@ export default function decorate(block) {
       cardLinkEl.dataset.aueProp = 'cardLinkText';
       cardLinkEl.dataset.aueType = 'text';
       cardLinkEl.dataset.aueLabel = 'Texto del enlace';
+    }
+
+    // Imagen superpuesta
+    const overlayPic = card.querySelector('.promo-carousel-card-overlay picture');
+    if (overlayPic) {
+      overlayPic.dataset.aueProp = 'overlayImage';
+      overlayPic.dataset.aueType = 'media';
+      overlayPic.dataset.aueLabel = 'Imagen superpuesta';
     }
   });
 

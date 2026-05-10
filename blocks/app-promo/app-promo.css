@@ -34,7 +34,7 @@
   margin: 0 auto;
   gap: var(--app-promo-gap);
   align-items: center;
-  min-height: 340px;
+  min-height: 260px;
 }
 
 /* 4. Text column */
@@ -145,7 +145,7 @@
 
 .app-promo-image picture img {
   max-width: 100%;
-  max-height: 380px;
+  max-height: 300px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -165,7 +165,7 @@
   }
 
   .app-promo-image picture img {
-    max-height: 420px;
+    max-height: 340px;
   }
 }
 
@@ -181,6 +181,6 @@
   }
 
   .app-promo-image picture img {
-    max-height: 460px;
+    max-height: 380px;
   }
 }

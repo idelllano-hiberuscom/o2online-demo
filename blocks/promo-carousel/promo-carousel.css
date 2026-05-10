@@ -152,6 +152,32 @@
   color: #fff;
 }
 
+/* 8b. Overlay image (product photo on top of background) */
+.promo-carousel-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.promo-carousel-card-overlay picture {
+  display: block;
+}
+
+.promo-carousel-card-overlay picture img {
+  display: block;
+  max-width: 85%;
+  max-height: 55%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 /* 9. Badge */
 
 /* ⚠️ TODO: Badge color per-item — managed via UE panel field in Fase 3 */

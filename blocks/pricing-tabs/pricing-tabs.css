@@ -27,8 +27,9 @@
   box-sizing: border-box;
 }
 
-/* 3. Config rows hidden */
-.pricing-tabs-config {
+/* 3. Config rows and meta cells hidden */
+.pricing-tabs-config,
+.pricing-tabs-card-meta {
   display: none;
 }
 
@@ -139,7 +140,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   transition: box-shadow 0.2s ease;
 }
 
@@ -147,55 +148,76 @@
   box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
 }
 
-/* 11. Card info */
-.pricing-tabs-card-info {
+/* 11. Card top section (info + price) */
+.pricing-tabs-card-top {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
 }
 
-.pricing-tabs-card-title {
-  font-family: var(--heading-font-family);
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 700;
-  color: #000019;
+.pricing-tabs-card-info {
+  flex: 1;
+}
+
+.pricing-tabs-card-info p {
   margin: 0;
+  font-size: 16px;
+  line-height: 22px;
+  color: #000019;
 }
 
-.pricing-tabs-card-title strong {
+.pricing-tabs-card-info strong {
   font-weight: 900;
 }
 
-.pricing-tabs-card-detail {
-  font-size: 14px;
-  line-height: 20px;
-  color: #4a4a4a;
-  margin: 0;
-}
-
-/* 12. Price column */
-.pricing-tabs-card-price-col {
+/* 12. Price */
+.pricing-tabs-card-price {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  flex-shrink: 0;
 }
 
-.pricing-tabs-card-price-col p {
-  margin: 0;
-  text-align: right;
+.pricing-tabs-card-price-value {
+  font-family: var(--heading-font-family);
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 900;
+  color: #000019;
+  white-space: nowrap;
 }
 
-/* 13. Card actions */
+.pricing-tabs-card-price-note {
+  font-size: 13px;
+  line-height: 18px;
+  color: #4a4a4a;
+}
+
+/* 13. Badge */
+.pricing-tabs-card-badge {
+  line-height: 0;
+}
+
+.pricing-tabs-card-badge picture {
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.pricing-tabs-card-badge picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 14. Card actions */
 .pricing-tabs-card-actions {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   align-items: center;
   margin-top: auto;
-}
-
-.pricing-tabs-card-actions p {
-  margin: 0;
+  padding-top: 4px;
 }
 
 /* 14. CTA buttons */
@@ -316,12 +338,6 @@
   .pricing-tabs-card {
     width: calc(50% - 8px);
     max-width: 320px;
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
-  .pricing-tabs-card-info {
-    flex: 1;
   }
 
   .pricing-tabs-banner-image {
@@ -360,12 +376,11 @@
     width: 280px;
     max-width: 280px;
     flex: 0 0 280px;
-    flex-direction: column;
   }
 
-  .pricing-tabs-card-title {
-    font-size: 22px;
-    line-height: 28px;
+  .pricing-tabs-card-price-value {
+    font-size: 38px;
+    line-height: 42px;
   }
 
   .pricing-tabs-banner {

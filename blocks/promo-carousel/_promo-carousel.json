@@ -89,6 +89,13 @@
           "value": "",
           "label": "Texto del enlace",
           "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "name": "overlayImage",
+          "value": "",
+          "label": "Imagen superpuesta",
+          "valueType": "string"
         }
       ]
     }

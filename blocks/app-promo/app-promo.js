@@ -25,47 +25,54 @@
  */
 export default function decorate(block) {
   const rows = [...block.children];
-  // Find the main content row (with a <picture>)
-  let row = null;
-  rows.forEach((r) => {
-    if (r.querySelector('picture')) {
-      row = r;
-    } else {
-      r.classList.add('app-promo-config');
+
+  // Collect all cells from all rows in model field order
+  // Model fields: text (richtext), image (reference), imageAlt (text)
+  const allCells = [];
+  rows.forEach((r) => [...r.children].forEach((c) => allCells.push(c)));
+
+  const imageCell = allCells.find((c) => c.querySelector('picture'));
+  if (!imageCell) return;
+
+  // Text cell: first non-image cell with content
+  const textCell = allCells.find((c) => c !== imageCell && c.textContent.trim());
+
+  // imageAlt cell: remaining cell (neither image nor text)
+  const altCell = allCells.find((c) => c !== imageCell && c !== textCell);
+  if (altCell) {
+    const altText = altCell.textContent.trim();
+    if (altText) {
+      const imgEl = imageCell.querySelector('picture img');
+      if (imgEl) imgEl.setAttribute('alt', altText);
     }
-  });
-  if (!row) return;
+  }
 
-  const cols = [...row.children];
-  const textCol = cols[0];
-  const imageCol = cols[1];
+  // Build layout in a single visible row
+  const mainRow = imageCell.parentElement;
+  mainRow.classList.add('app-promo-row');
 
-  // Classify the single row
-  row.classList.add('app-promo-row');
+  // --- Text content ---
+  if (textCell) {
+    textCell.classList.add('app-promo-content');
+    if (textCell.parentElement !== mainRow) {
+      mainRow.insertBefore(textCell, mainRow.firstChild);
+    }
 
-  // --- Col 0: text content ---
-  if (textCol) {
-    textCol.classList.add('app-promo-content');
-
-    const heading = textCol.querySelector('h2');
+    const heading = textCell.querySelector('h2');
     if (heading) heading.classList.add('app-promo-title');
 
-    const featureList = textCol.querySelector('ul');
+    const featureList = textCell.querySelector('ul');
     if (featureList) featureList.classList.add('app-promo-features');
 
-    // Identify badge paragraphs: <p> elements containing an <a>
-    // They are the last 2 <p> with <a> in the text column
-    const allParas = [...textCol.querySelectorAll(':scope > p')];
+    const allParas = [...textCell.querySelectorAll(':scope > p')];
     const badgeParas = allParas.filter((p) => p.querySelector('a'));
 
-    // Description paragraphs: <p> without <a>
     allParas.forEach((p) => {
       if (!p.querySelector('a')) {
         p.classList.add('app-promo-description');
       }
     });
 
-    // Wrap badge paragraphs in a badges container
     if (badgeParas.length) {
       const badgesWrapper = document.createElement('div');
       badgesWrapper.classList.add('app-promo-badges');
@@ -76,27 +83,35 @@ export default function decorate(block) {
         badgesWrapper.append(p);
       });
 
-      textCol.append(badgesWrapper);
+      textCell.append(badgesWrapper);
     }
   }
 
-  // --- Col 1: phone image ---
-  if (imageCol) {
-    imageCol.classList.add('app-promo-image');
+  // --- Image (ensure it's after text for right-side placement) ---
+  imageCell.classList.add('app-promo-image');
+  if (textCell && textCell.parentElement === mainRow) {
+    mainRow.appendChild(imageCell);
+  }
 
-    // Below-the-fold block — all images lazy
-    imageCol.querySelectorAll('picture img').forEach((img) => {
+  imageCell.querySelectorAll('picture img').forEach((img) => {
+    img.setAttribute('loading', 'lazy');
+    img.setAttribute('decoding', 'async');
+  });
+
+  // Badge images: also lazy
+  if (textCell) {
+    textCell.querySelectorAll('.app-promo-badges picture img').forEach((img) => {
       img.setAttribute('loading', 'lazy');
       img.setAttribute('decoding', 'async');
     });
   }
 
-  // Badge images: also lazy
-  if (textCol) {
-    textCol.querySelectorAll('.app-promo-badges picture img').forEach((img) => {
-      img.setAttribute('loading', 'lazy');
-      img.setAttribute('decoding', 'async');
-    });
+  // Hide remaining rows and unused cells
+  rows.forEach((r) => {
+    if (r !== mainRow) r.classList.add('app-promo-config');
+  });
+  if (altCell && altCell.parentElement === mainRow) {
+    altCell.style.display = 'none';
   }
 
   // --- INSTRUMENTACIÓN UE (xwalk) ---
@@ -107,16 +122,16 @@ export default function decorate(block) {
   block.dataset.aueLabel = 'App Promo';
 
   // Contenido de texto (richtext)
-  if (textCol) {
-    textCol.dataset.aueProp = 'text';
-    textCol.dataset.aueType = 'richtext';
-    textCol.dataset.aueLabel = 'Contenido';
+  if (textCell) {
+    textCell.dataset.aueProp = 'text';
+    textCell.dataset.aueType = 'richtext';
+    textCell.dataset.aueLabel = 'Contenido';
   }
 
   // Imagen del teléfono
-  if (imageCol) {
-    imageCol.dataset.aueProp = 'image';
-    imageCol.dataset.aueType = 'media';
-    imageCol.dataset.aueLabel = 'Imagen del teléfono';
+  if (imageCell) {
+    imageCell.dataset.aueProp = 'image';
+    imageCell.dataset.aueType = 'media';
+    imageCell.dataset.aueLabel = 'Imagen del teléfono';
   }
 }

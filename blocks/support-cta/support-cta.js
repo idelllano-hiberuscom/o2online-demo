@@ -14,50 +14,82 @@
 export default function decorate(block) {
   const rows = [...block.children];
 
-  // Find the main row (the one with a <picture> icon)
-  let mainRow = null;
-  rows.forEach((row) => {
-    if (row.querySelector('picture')) {
-      mainRow = row;
+  // Collect all cells from all rows in model field order
+  // Model fields: icon (reference), body (richtext), linkText (text), link (text)
+  const allCells = [];
+  rows.forEach((r) => [...r.children].forEach((c) => allCells.push(c)));
+
+  const iconCell = allCells.find((c) => c.querySelector('picture'));
+  if (!iconCell) return;
+
+  const contentCells = allCells.filter((c) => c !== iconCell);
+  const bodyCell = contentCells[0] || null;
+
+  // linkText + link: check for <a> (collapsed) or separate text cells
+  let linkTextVal = '';
+  let linkUrlVal = '#';
+  if (contentCells[1]) {
+    const existingLink = contentCells[1].querySelector('a');
+    if (existingLink) {
+      linkTextVal = existingLink.textContent.trim();
+      linkUrlVal = existingLink.href;
     } else {
-      // Hide config/empty rows from xwalk
-      row.classList.add('support-cta-config');
-    }
-  });
-
-  if (!mainRow) return;
-
-  mainRow.classList.add('support-cta-row');
-  const cols = [...mainRow.children];
-
-  // Col 0: icon
-  if (cols[0]) {
-    cols[0].classList.add('support-cta-icon');
-
-    const img = cols[0].querySelector('picture img');
-    if (img) {
-      img.setAttribute('alt', '');
-      img.setAttribute('loading', 'lazy');
-      img.setAttribute('decoding', 'async');
-      img.setAttribute('width', '60');
-      img.setAttribute('height', '60');
-    }
-  }
-
-  // Col 1: text + link
-  if (cols[1]) {
-    cols[1].classList.add('support-cta-content');
-
-    const paragraphs = cols[1].querySelectorAll('p');
-    paragraphs.forEach((p) => {
-      const link = p.querySelector('a');
-      if (link) {
-        link.classList.add('support-cta-link');
-      } else {
-        p.classList.add('support-cta-text');
+      linkTextVal = contentCells[1].textContent.trim();
+      if (contentCells[2]) {
+        const link2 = contentCells[2].querySelector('a');
+        linkUrlVal = link2 ? link2.href : (contentCells[2].textContent.trim() || '#');
       }
-    });
+    }
   }
+
+  // Build layout in the icon's row
+  const mainRow = iconCell.parentElement;
+  mainRow.classList.add('support-cta-row');
+
+  // Icon
+  iconCell.classList.add('support-cta-icon');
+  const iconImg = iconCell.querySelector('picture img');
+  if (iconImg) {
+    iconImg.setAttribute('alt', '');
+    iconImg.setAttribute('loading', 'lazy');
+    iconImg.setAttribute('decoding', 'async');
+    iconImg.setAttribute('width', '60');
+    iconImg.setAttribute('height', '60');
+  }
+
+  // Content: body text + link
+  const contentDiv = document.createElement('div');
+  contentDiv.classList.add('support-cta-content');
+
+  if (bodyCell) {
+    const paragraphs = [...bodyCell.querySelectorAll('p')];
+    if (paragraphs.length) {
+      paragraphs.forEach((p) => {
+        p.classList.add('support-cta-text');
+        contentDiv.appendChild(p);
+      });
+    } else {
+      const p = document.createElement('p');
+      p.classList.add('support-cta-text');
+      p.textContent = bodyCell.textContent.trim();
+      contentDiv.appendChild(p);
+    }
+  }
+
+  if (linkTextVal) {
+    const linkEl = document.createElement('a');
+    linkEl.href = linkUrlVal;
+    linkEl.textContent = linkTextVal;
+    linkEl.classList.add('support-cta-link');
+    contentDiv.appendChild(linkEl);
+  }
+
+  mainRow.appendChild(contentDiv);
+
+  // Hide remaining rows
+  rows.forEach((r) => {
+    if (r !== mainRow) r.classList.add('support-cta-config');
+  });
 
   // --- INSTRUMENTACIÓN UE (xwalk) ---
 
